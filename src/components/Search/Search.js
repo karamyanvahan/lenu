@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 
 import { Search as SearchIcon, Close } from '@material-ui/icons';
 
-import { Ripple } from './utils';
+import { Ripple } from '../utils';
 
 import './Search.sass'
 
-export default function Search() {
+export default function Search(props) {
     let [state, setState] = useState({
         input: ""
     })
@@ -18,10 +18,14 @@ export default function Search() {
     function clear() {
         setState({ input: '' })
     }
+
+    function onSearch() {
+        props.onSearch(state.value);
+    }
     
     return (
         <div className="Search">
-            <form>
+            <form onSubmit={(e) => e.preventDefault()}>
                 <Ripple style={{borderRadius: '25px'}}>
                     <input type="text" value={state.input} placeholder="Search" onChange={onInput} />
                 </Ripple>
@@ -29,7 +33,7 @@ export default function Search() {
                 <div className={"controls" + (state.input.length ? "" : " hidden")}>
                     <button type="button" className="button mini" onClick={clear}><Close /></button>
                     <separator vertical=""></separator>
-                    <button type="submit" className="button"><text>Search</text></button>
+                    <button type="submit" className="button" onClick={onSearch}><text>Search</text></button>
                 </div>
             </form>
         </div>

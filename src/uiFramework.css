@@ -1338,7 +1338,7 @@
     
     
     
-    @media (prefers-color-scheme: dark) {
+    /* @media (prefers-color-scheme: dark) {
         :root {
             --main-background: #2c2c2c;
             --main-text: #fff;
@@ -1370,5 +1370,5 @@
     
     
     
-    }
+    } */
     

@@ -1,11 +1,19 @@
 import React from 'react';
 
 import Search from './../components/Search';
+import LocationList from './../components/LocationList';
 import { Space } from './../components/utils';
 
 import './Home.sass'
+import { connect } from 'react-redux';
 
-export default function Home() {
+import * as locationActions from '../store/actions/location'
+
+function Home(props) {
+    function onSearch(searchValue) {
+        props.getLocations(searchValue);
+    }
+
     return (
         <div className="Home">
             <div>
@@ -13,10 +21,17 @@ export default function Home() {
                 <Space size="sm" />
                 Digital menu in your pocket
                 <Space size="lg" />
-                <Search />
+                <Search onSearch={onSearch}/>
                 <Space size="xl"/>
                 <div className="light info">No place nearby using Lenu yet, you can use search to find your favorite one's</div>
+                <LocationList />
             </div>
         </div>
     )
 }
+
+const mapDispatchToProps = dispatch => ({
+    getLocations: (searchValue) => dispatch(locationActions.fetchListData(searchValue))
+});
+
+export default connect(null, mapDispatchToProps)(Home);
