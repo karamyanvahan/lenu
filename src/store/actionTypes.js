@@ -1,4 +1,5 @@
 export const 
     ERROR = 'ERROR',
     IS_LOADED = 'IS_LOADED',
+    SET_SEARCH_TEXT = 'SET_SEARCH_TEXT',
     SET_DATA = 'SET_DATA';

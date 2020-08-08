@@ -3,7 +3,8 @@ import * as actionTypes from '../actionTypes';
 const initialState = {
     data: [],
     isLoaded: false,
-    hasError: false
+    hasError: false,
+    searchText: ''
 };
 
 export default function reducer(state = initialState, action) {
@@ -13,7 +14,7 @@ export default function reducer(state = initialState, action) {
                 ...state,
                 hasError: action.value
             }
-        case actionTypes.ERROR:
+        case actionTypes.IS_LOADED:
             return { 
                 ...state,
                 isLoaded: action.value
@@ -22,6 +23,11 @@ export default function reducer(state = initialState, action) {
             return { 
                 ...state,
                 data: action.value
+            }
+        case actionTypes.SET_SEARCH_TEXT:
+            return { 
+                ...state,
+                searchText: action.value
             }
     }
     return state;

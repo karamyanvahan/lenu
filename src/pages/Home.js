@@ -10,10 +10,6 @@ import { connect } from 'react-redux';
 import * as locationActions from '../store/actions/location'
 
 function Home(props) {
-    function onSearch(searchValue) {
-        props.getLocations(searchValue);
-    }
-
     return (
         <div className="Home">
             <div>
@@ -21,7 +17,7 @@ function Home(props) {
                 <Space size="sm" />
                 Digital menu in your pocket
                 <Space size="lg" />
-                <Search onSearch={onSearch}/>
+                <Search />
                 <Space size="xl"/>
                 <div className="light info">No place nearby using Lenu yet, you can use search to find your favorite one's</div>
                 <LocationList />
@@ -30,8 +26,4 @@ function Home(props) {
     )
 }
 
-const mapDispatchToProps = dispatch => ({
-    getLocations: (searchValue) => dispatch(locationActions.fetchListData(searchValue))
-});
-
-export default connect(null, mapDispatchToProps)(Home);
+export default Home;
