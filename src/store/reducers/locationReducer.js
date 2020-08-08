@@ -19,7 +19,7 @@ export default function reducer(state = initialState, action) {
                 ...state,
                 isLoaded: action.value
             }
-        case actionTypes.SET_DATA:
+        case actionTypes.FETCH_DATA_SUCCESS:
             return { 
                 ...state,
                 data: action.value
@@ -27,7 +27,8 @@ export default function reducer(state = initialState, action) {
         case actionTypes.SET_SEARCH_TEXT:
             return { 
                 ...state,
-                searchText: action.value
+                searchText: action.value,
+                isLoaded: true
             }
     }
     return state;

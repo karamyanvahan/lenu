@@ -8,6 +8,7 @@ import './Home.sass'
 import { connect } from 'react-redux';
 
 import * as locationActions from '../store/actions/location'
+import { Satellite } from '@material-ui/icons';
 
 function Home(props) {
     return (
@@ -20,10 +21,20 @@ function Home(props) {
                 <Search />
                 <Space size="xl"/>
                 <div className="light info">No place nearby using Lenu yet, you can use search to find your favorite one's</div>
+                {props.locationsLoaded && 
+                    props.locations.map(location => 
+                        <h3>{location.Name}</h3>
+                    )
+                }
                 <LocationList />
             </div>
         </div>
     )
 }
 
-export default Home;
+const mapStateToProps = state => ({
+    locations: state.locations.data,
+    locationsLoaded: state.locations.isLoaded
+});
+
+export default connect(mapStateToProps)(Home);
