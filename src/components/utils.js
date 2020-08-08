@@ -26,7 +26,7 @@ Space.propTypes = {
 
 export function Ripple(props) {
     return (
-        <ButtonBase {...props}>
+        <ButtonBase {...props} className="ripple">
             { props.children }
         </ButtonBase>
     )
