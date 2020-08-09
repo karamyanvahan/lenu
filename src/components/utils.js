@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { ButtonBase, Button } from '@material-ui/core';
+import { ButtonBase, Button, CircularProgress } from '@material-ui/core';
 
 import './utils.sass'
 
@@ -39,5 +39,15 @@ export function ButtonTransparent(props) {
         <Button {...props} className="ButtonTransparent">
             { props.children }
         </Button>
+    )
+}
+
+// =================== Loader ======================//
+
+export function Loader(props) {
+    return (
+        <div className="Loader">
+            <CircularProgress color="inherit" />
+        </div>
     )
 }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 
 import { Search as SearchIcon, Close } from '@material-ui/icons';
@@ -10,10 +10,6 @@ import { Ripple } from '../utils';
 import './Search.sass'
 
 function Search(props) {
-    let [state, setState] = useState({
-        input: ""
-    })
-
     function onInput(e) {
         props.setSearchText(e.target.value);
     }

@@ -2,7 +2,7 @@ import * as actionTypes from '../actionTypes';
 
 const initialState = {
     data: [],
-    isLoaded: false,
+    loading: false,
     hasError: false,
     searchText: ''
 };
@@ -14,15 +14,16 @@ export default function reducer(state = initialState, action) {
                 ...state,
                 hasError: action.value
             }
-        case actionTypes.IS_LOADED:
+        case actionTypes.LOADING:
             return { 
                 ...state,
-                isLoaded: action.value
+                loading: action.value
             }
         case actionTypes.FETCH_DATA_SUCCESS:
             return { 
                 ...state,
-                data: action.value
+                data: action.value,
+                loading: false
             }
         case actionTypes.SET_SEARCH_TEXT:
             return { 
