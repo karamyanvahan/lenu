@@ -25,8 +25,9 @@ Space.propTypes = {
 // =================== Ripple ======================//
 
 export function Ripple(props) {
+    console.log(props.children)
     return (
-        <ButtonBase {...props} className="ripple">
+        <ButtonBase {...props} className={`ripple ${props.className}`}>
             { props.children }
         </ButtonBase>
     )
