@@ -8,19 +8,9 @@ import './utils.sass'
 
 export function Ripple(props) {
     return (
-        <ButtonBase component="div" {...props} className={`ripple ${props.className}`}>
+        <ButtonBase component="div" {...props} className={`ripple${props.className ? (' ' + props.className) : ''}`} onMouseDown={e => e.stopPropagation()}>
             { props.children }
         </ButtonBase>
-    )
-}
-
-// =================== Button ======================//
-
-export function ButtonTransparent(props) {
-    return (
-        <Button {...props} className="ButtonTransparent">
-            { props.children }
-        </Button>
     )
 }
 

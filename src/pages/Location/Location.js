@@ -5,16 +5,19 @@ import { KeyboardArrowDown, KeyboardArrowUp } from '@material-ui/icons';
 
 import {Loader, Ripple} from '../../components/utils'
 import BackButton from '../../components/BackButton'
+import MenuSectionList from '../../components/MenuSectionList';
 
 import { fetchDetails } from '../../store/actions/locationDetails'
 
 import * as utils from '../../utils'
 
 import './Location.sass'
+import Dropdown from '../../components/Dropdown';
 
 function Location(props) {
     let id = props.match.params.id,
-        data = props.data[id];
+        data = props.data[id],
+        content;
         
     const [isOpen, setIsOpen] = useState(false);
     
@@ -39,9 +42,12 @@ function Location(props) {
         </div>
     );
 
+    const onOpen = () => setIsOpen(!isOpen)
+
     const header = (
-        <div className="header" style={headerStyle}>
+        <Ripple className="header" style={headerStyle} onClick={onOpen}>
             <img className="logo" src={data.LogoUrl} />
+            <Dropdown onClick={e => e.stopPropagation()} />
             <div className="space md"></div>
             <div className="name"><b>{data.Name}</b></div>
             <div className="space sm"></div>
@@ -55,10 +61,10 @@ function Location(props) {
                     <a href={`tel:${data.MainPhone}`}>{data.MainPhone}</a>
                 </>
             )}
-        </div>
+        </Ripple>
     );
 
-    const onOpen = () => setIsOpen(!isOpen)
+    content = <MenuSectionList data={data.Menus[0].Sections} backColor={data.BackColor} textColor={data.TextColor} />
 
     return (
         <div className="LocationPage">
@@ -68,9 +74,10 @@ function Location(props) {
             {header}
             <div className="openerContainer">
                 <Ripple className="openButton">
-                    <button type="button" className="button mini" onClick={onOpen}>{isOpen ? <KeyboardArrowUp /> :<KeyboardArrowDown />}</button>
+                    <button type="button" effect="material" className="button mini" onClick={onOpen}>{isOpen ? <KeyboardArrowUp /> :<KeyboardArrowDown />}</button>
                 </Ripple>
             </div>
+            {content}
         </div>
     )
 }
