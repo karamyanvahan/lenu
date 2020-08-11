@@ -35,7 +35,7 @@ function Search(props) {
                 <div className={"controls" + (props.searchText.length ? "" : " hidden")}>
                     <button type="button" className="button mini" onClick={clear}><Close /></button>
                     <separator vertical=""></separator>
-                    <button type="submit" className="button" onClick={onSearch}><text>Search</text></button>
+                    <button type="submit" className="button" onClick={onSearch}>Search</button>
                 </div>
             </form>
         </div>

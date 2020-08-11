@@ -1,9 +1,10 @@
 import React, {useState} from 'react';
 import { connect } from 'react-redux';
 
-import { KeyboardArrowDown, KeyboardArrowUp, KeyboardArrowLeft } from '@material-ui/icons';
+import { KeyboardArrowDown, KeyboardArrowUp } from '@material-ui/icons';
 
 import {Loader, Ripple} from '../../components/utils'
+import BackButton from '../../components/BackButton'
 
 import { fetchDetails } from '../../store/actions/locationDetails'
 
@@ -33,10 +34,8 @@ function Location(props) {
     }
 
     const nav = (
-        <div class="nav">
-            <Ripple>
-                <button type="button" className="button mini">{<KeyboardArrowLeft />}</button>
-            </Ripple>
+        <div className="nav">
+            <BackButton />
         </div>
     );
 
