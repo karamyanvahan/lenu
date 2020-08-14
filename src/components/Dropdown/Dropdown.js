@@ -4,7 +4,7 @@ import { Popper, ClickAwayListener } from '@material-ui/core';
 
 import { Ripple } from '../utils'
 
-import './Dropdown.sass'
+import classes from './Dropdown.module.sass'
 
 export function Dropdown(props) {
     let [isOpen, setIsOpen] = useState(false),
@@ -21,8 +21,8 @@ export function Dropdown(props) {
 
     return (
         <ClickAwayListener onClickAway={onClickAway}>
-            <div className="Dropdown" onClick={props.onClick}>
-                <Ripple className="dropdown-button">
+            <div className={classes.Dropdown + " " + props.className} onClick={props.onClick}>
+                <Ripple className={classes.dropdownButton}>
                     <button ref={anchorRef} type="button" className="button mini" onClick={onToggle}>a</button>
                 </Ripple>
                 <Popper open={isOpen} anchorEl={anchorRef.current} >

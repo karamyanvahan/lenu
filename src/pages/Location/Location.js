@@ -11,7 +11,7 @@ import { fetchDetails } from '../../store/actions/locationDetails'
 
 import * as utils from '../../utils'
 
-import './Location.sass'
+import styles from './Location.sass'
 import { Dropdown, Item } from '../../components/Dropdown';
 
 function Location(props) {
@@ -45,8 +45,8 @@ function Location(props) {
     const onOpen = () => setIsOpen(!isOpen)
 
     const header = (
-        <Ripple className="header" style={headerStyle} onClick={onOpen}>
-            <img className="logo" src={data.LogoUrl} />
+        <Ripple className={styles.header} style={headerStyle} onClick={onOpen}>
+            <img className={styles.logo} src={data.LogoUrl} />
             <Dropdown onClick={e => e.stopPropagation()}>
                 {data.Languages.map(language => <Item value={language.ID} label={language.code}>{language.Name}</Item>)}
             </Dropdown>
