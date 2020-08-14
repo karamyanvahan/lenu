@@ -12,7 +12,7 @@ import { fetchDetails } from '../../store/actions/locationDetails'
 import * as utils from '../../utils'
 
 import './Location.sass'
-import Dropdown from '../../components/Dropdown';
+import { Dropdown, Item } from '../../components/Dropdown';
 
 function Location(props) {
     let id = props.match.params.id,
@@ -47,7 +47,9 @@ function Location(props) {
     const header = (
         <Ripple className="header" style={headerStyle} onClick={onOpen}>
             <img className="logo" src={data.LogoUrl} />
-            <Dropdown onClick={e => e.stopPropagation()} />
+            <Dropdown onClick={e => e.stopPropagation()}>
+                {data.Languages.map(language => <Item value={language.ID} label={language.code}>{language.Name}</Item>)}
+            </Dropdown>
             <div className="space md"></div>
             <div className="name"><b>{data.Name}</b></div>
             <div className="space sm"></div>
