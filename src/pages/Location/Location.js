@@ -11,7 +11,7 @@ import { fetchDetails } from '../../store/actions/locationDetails'
 
 import * as utils from '../../utils'
 
-import styles from './Location.sass'
+import styles from './Location.module.sass'
 import { Dropdown, Item } from '../../components/Dropdown';
 
 function Location(props) {
@@ -37,7 +37,7 @@ function Location(props) {
     }
 
     const nav = (
-        <div className="nav">
+        <div className={styles.nav}>
             <BackButton />
         </div>
     );
@@ -51,7 +51,7 @@ function Location(props) {
                 {data.Languages.map(language => <Item value={language.ID} label={language.code}>{language.Name}</Item>)}
             </Dropdown>
             <div className="space md"></div>
-            <div className="name"><b>{data.Name}</b></div>
+            <div className={styles.name}><b>{data.Name}</b></div>
             <div className="space sm"></div>
             <div className={`desc light ${isOpen ? '' : 'clamp clamp-2'}`}>{data.Desc}</div>
             {isOpen && (
@@ -69,13 +69,13 @@ function Location(props) {
     content = <MenuSectionList data={data.Menus[0].Sections} backColor={data.BackColor} textColor={data.TextColor} />
 
     return (
-        <div className="LocationPage">
+        <div className={styles.LocationPage}>
             <div className="space md"></div>
             {nav}
             <div className="space md"></div>
             {header}
-            <div className="openerContainer">
-                <Ripple className="openButton">
+            <div className={styles.openerContainer}>
+                <Ripple className={styles.openButton}>
                     <button type="button" effect="material" className="button mini" onClick={onOpen}>{isOpen ? <KeyboardArrowUp /> :<KeyboardArrowDown />}</button>
                 </Ripple>
             </div>
