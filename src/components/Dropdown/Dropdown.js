@@ -21,7 +21,7 @@ export function Dropdown(props) {
 
     return (
         <ClickAwayListener onClickAway={onClickAway}>
-            <div className={classes.Dropdown + " " + props.className} onClick={props.onClick}>
+            <div className={classes.Dropdown + " Dropdown " + (props.className || "")} onClick={props.onClick}>
                 <Ripple className={classes.dropdownButton}>
                     <button ref={anchorRef} type="button" className="button mini" onClick={onToggle}>a</button>
                 </Ripple>

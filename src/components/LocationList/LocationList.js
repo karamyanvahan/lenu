@@ -5,7 +5,7 @@ import { Loader } from '../utils'
 
 import Location from '../Location'
 
-import './LocationList.sass'
+import styles from './LocationList.module.sass'
 
 function LocationList(props) {
     let content;
@@ -13,13 +13,13 @@ function LocationList(props) {
     if(props.loading) {
         content = <Loader />;
     } else if(props.data.length === 0) {
-        content = <div className="info light"><div>Nothing found</div></div>;
+        content = <div className={`${styles.info} light`}><div>Nothing found</div></div>;
     } else {
         content = props.data.map(i => <Location key={i.ID} id={i.ID} backColor={i.BackColor} textColor={i.TextColor} desc={i.Desc} logo={i.LogoUrl} name={i.Name} />);
     }
 
     return (
-        <div className="LocationList">
+        <div className={styles.LocationList}>
             {content}
         </div>
     )

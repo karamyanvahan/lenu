@@ -8,7 +8,6 @@ export function toHexColor(n) {
 }
 
 export function lightenDarkenColor(col, amt = 70) {
-  
     var usePound = false;
   
     if (col[0] == "#") {
