@@ -47,7 +47,7 @@ function Location(props) {
     const header = (
         <Ripple className={styles.header} style={headerStyle} onClick={onOpen}>
             <img className={styles.logo} src={data.LogoUrl} />
-            <Dropdown onClick={e => e.stopPropagation()}>
+            <Dropdown onClick={e => e.stopPropagation()} placement="bottom-end">
                 {data.Languages.map(language => <Item value={language.ID} label={language.code}>{language.Name}</Item>)}
             </Dropdown>
             <div className="space md"></div>

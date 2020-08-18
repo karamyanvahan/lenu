@@ -1,5 +1,42 @@
-.Dropdown 
+@import '../../variables.sass'
+
+.Dropdown
     .dropdownButton
         border-radius: 50%
-    .item
-        
+    .container
+        padding: 10px 0
+        border-radius: 10px
+        color: #000000
+        background-color: #fff
+        min-width: 240px
+        box-shadow: 0 0 0 1px $main-dark 
+        .item
+            display: flex
+            align-items: center
+            justify-content: start
+            padding: 0 15px 0 5px
+            width: 100%
+            font-weight: 400
+            &:hover
+                background: $over-color
+            .icon
+                width: 30px
+                height: 30px
+                margin: 5px
+
+.fade
+    opacity: 0
+    transition: .2s
+.fade-enter
+    opacity: 0
+    transform: translateY(-10px)
+.fade-enter-active
+    opacity: 1
+    transform: translateY(0)
+.fade-exit
+    opacity: 1
+    transform: translateY(0)
+.fade-exit-active
+    opacity: 1
+    transform: translateY(-10px)
+    
