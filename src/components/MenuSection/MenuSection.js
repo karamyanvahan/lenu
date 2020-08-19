@@ -1,4 +1,5 @@
 import React from 'react';
+import {connect} from 'react-redux';
 
 import { Ripple } from '../utils';
 import * as utils from '../../utils'
@@ -14,10 +15,14 @@ function MenuSection(props) {
     return (
         <div className={styles.MenuSection}>
             <Ripple style={inlineStyles}>
-                <b>{props.name.en}</b>
+                <b>{props.name[props.language]}</b>
             </Ripple>
         </div>
     )
 }
 
-export default MenuSection;
+const mapStateToProps = state => ({
+    language: state.locations.language
+});
+
+export default connect(mapStateToProps)(MenuSection);

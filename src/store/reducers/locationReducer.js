@@ -4,7 +4,8 @@ const initialState = {
     data: [],
     loading: false,
     hasError: false,
-    searchText: ''
+    searchText: '',
+    language: null
 };
 
 export default function reducer(state = initialState, action) {
@@ -30,6 +31,11 @@ export default function reducer(state = initialState, action) {
                 ...state,
                 searchText: action.value,
                 isLoaded: true
+            }
+        case actionTypes.SET_LOCATION_LANGUAGE:
+            return { 
+                ...state,
+                language: action.value
             }
     }
     return state;

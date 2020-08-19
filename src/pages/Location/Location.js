@@ -13,6 +13,7 @@ import * as utils from '../../utils'
 
 import styles from './Location.module.sass'
 import { Dropdown, Item } from '../../components/Dropdown';
+import { setLanguage } from '../../store/actions/location';
 
 function Location(props) {
     let id = props.match.params.id,
@@ -20,6 +21,10 @@ function Location(props) {
         content;
         
     const [isOpen, setIsOpen] = useState(false);
+
+    function onLanguageSelect(selection) {
+        props.setLanguage(selection.value);
+    }
     
     if(!data) {
         props.getData(id);
@@ -47,9 +52,10 @@ function Location(props) {
     const header = (
         <Ripple className={styles.header} style={headerStyle} onClick={onOpen}>
             <img className={styles.logo} src={data.LogoUrl} />
-            <Dropdown onClick={e => e.stopPropagation()} placement="bottom-end">
-                {data.Languages.map(language => <Item value={language.ID} label={language.code}>{language.Name}</Item>)}
-            </Dropdown>
+            {data.Languages &&
+                <Dropdown value={data.Languages[0].Code} onSelect={onLanguageSelect} onClick={e => e.stopPropagation()} placement="bottom-end">
+                    {data.Languages.map(language => <Item key={language.ID} value={language.Code} label={language.Code}>{language.Name}</Item>)}
+                </Dropdown>}
             <div className="space md"></div>
             <div className={styles.name}><b>{data.Name}</b></div>
             <div className="space sm"></div>
@@ -60,7 +66,7 @@ function Location(props) {
                     <div><b>{data.WorkingHours}</b></div>
                     <div className="space sm"></div>
                     <div>{data.Address}</div>
-                    <a href={`tel:${data.MainPhone}`}>{data.MainPhone}</a>
+                    <a href={`tel:${data.MainPhone}`} onClick={e => e.stopPropagation()}>{data.MainPhone}</a>
                 </>
             )}
         </Ripple>
@@ -85,11 +91,13 @@ function Location(props) {
 }
 
 const mapStateToProps = state => ({
-    data: state.locationDetails
+    data: state.locationDetails,
+    language: state.locations.language
 });
 
 const mapDispatchToProps = dispatch => ({
-    getData: id => dispatch(fetchDetails(id))
+    getData: id => dispatch(fetchDetails(id)),
+    setLanguage: value => dispatch(setLanguage(value))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Location);
