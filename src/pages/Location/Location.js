@@ -1,17 +1,19 @@
 import React, {useState} from 'react';
 import { connect } from 'react-redux';
+import { Route, Switch } from 'react-router-dom';
 
 import { KeyboardArrowDown, KeyboardArrowUp } from '@material-ui/icons';
 
 import {Loader, Ripple} from '../../components/utils'
 import BackButton from '../../components/BackButton'
+import MenuList from '../../components/MenuList';
 import MenuSectionList from '../../components/MenuSectionList';
 
-import { fetchDetails } from '../../store/actions/locationDetails'
+import { fetchDetails } from '../../store/actions/locationDetails';
 
-import * as utils from '../../utils'
+import * as utils from '../../utils';
 
-import styles from './Location.module.sass'
+import styles from './Location.module.sass';
 import { Dropdown, Item } from '../../components/Dropdown';
 import { setLanguage } from '../../store/actions/location';
 
@@ -71,8 +73,14 @@ function Location(props) {
             )}
         </Ripple>
     );
-
-    content = <MenuSectionList data={data.Menus[0].Sections} backColor={data.BackColor} textColor={data.TextColor} />
+    
+    // if(!data.Menus.length) {
+    //     content = "";
+    // } else if(data.Menus.length > 1) {
+    //     content = 
+    // } else {
+    //     content = <MenuSectionList data={data.Menus[0].Sections} backColor={data.BackColor} textColor={data.TextColor} />
+    // }
 
     return (
         <div className={styles.LocationPage}>
@@ -85,7 +93,10 @@ function Location(props) {
                     <button type="button" effect="material" className="button mini" onClick={onOpen}>{isOpen ? <KeyboardArrowUp /> :<KeyboardArrowDown />}</button>
                 </Ripple>
             </div>
-            {content}
+            <Switch>
+                <Route path={props.location.pathname + "/:sectionId"} render={({match}) => <Content data={data} match={match} />} />
+                <Route path={props.location.pathname} render={({match}) => <Content data={data} match={match} />} />
+            </Switch>
         </div>
     )
 }
@@ -99,5 +110,15 @@ const mapDispatchToProps = dispatch => ({
     getData: id => dispatch(fetchDetails(id)),
     setLanguage: value => dispatch(setLanguage(value))
 });
+
+function Content(props) {
+    const data = props.data;
+
+    if(props.match.sectionID) {
+        return "section";
+    } else {
+        return <MenuList data={data.Menus} backColor={data.BackColor} textColor={data.TextColor} />
+    }
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(Location);
