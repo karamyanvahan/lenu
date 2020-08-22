@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {Link} from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
 
 import { Ripple } from '../utils';
 import * as utils from '../../utils';
@@ -14,7 +14,7 @@ function Menu(props) {
     }
     
     return (
-        <Link to={""+ props.id} className={styles.Menu} >
+        <Link to={`${props.match.url}/${props.id}`} className={styles.Menu} >
             <Ripple style={inlineStyles}>
                 <b>{props.name[props.language]}</b>
             </Ripple>
@@ -26,4 +26,4 @@ const mapStateToProps = state => ({
     language: state.locations.language
 });
 
-export default connect(mapStateToProps)(Menu);
+export default connect(mapStateToProps)(withRouter(Menu));

@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import { connect } from 'react-redux';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 
 import { KeyboardArrowDown, KeyboardArrowUp } from '@material-ui/icons';
 
@@ -94,8 +94,8 @@ function Location(props) {
                 </Ripple>
             </div>
             <Switch>
-                <Route path={props.location.pathname + "/:sectionId"} render={({match}) => <Content data={data} match={match} />} />
-                <Route path={props.location.pathname} render={({match}) => <Content data={data} match={match} />} />
+                <Route path={props.match.url + "/:menuId"} render={({match}) => <Content data={data} match={match} />} />
+                <Route path={props.match.url} render={({match}) => <Content data={data} match={match} />} />
             </Switch>
         </div>
     )
@@ -113,10 +113,12 @@ const mapDispatchToProps = dispatch => ({
 
 function Content(props) {
     const data = props.data;
-
-    if(props.match.sectionID) {
-        return "section";
+    if(props.match.params.menuId) {
+        return <MenuSectionList data={data.Menus.find(m => m.ID == props.match.params.menuId).Sections} backColor={data.BackColor} textColor={data.TextColor} />
     } else {
+        if(data.Menus.length === 1) {
+            return <Redirect to={`${props.match.url}/${data.Menus[0].ID}`} />
+        }
         return <MenuList data={data.Menus} backColor={data.BackColor} textColor={data.TextColor} />
     }
 }
