@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-axios.defaults.baseURL = 'https://service.lenu.cafe/api/json/orglocation'
+axios.defaults.baseURL = 'https://menyou-service.ogmastage.com/api/json/orglocation';
 
 export function getLocations(searchText) {
     return axios.get('/list', {

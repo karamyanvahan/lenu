@@ -56,12 +56,10 @@ export function Dropdown(props) {
                 <Ripple className={classes.dropdownButton}>
                     <button ref={anchorRef} type="button" className="button mini" onClick={onToggle}>{selection.text}</button>
                 </Ripple>
-                <Popper open={isOpen} anchorEl={anchorRef.current} disablePortal={true} placement={props.placement} transition>
+                <Popper className={classes.container} open={isOpen} anchorEl={anchorRef.current} disablePortal={true} placement={props.placement} transition>
                     {({TransitionProps}) => (
                         <Fade {...TransitionProps}>
-                            <div className={classes.container}>
-                                {React.Children.map(props.children, child => React.cloneElement(child, {onClick: () => onSelect(child.props.value)}))}
-                            </div>
+                            {React.Children.map(props.children, child => React.cloneElement(child, {onClick: () => onSelect(child.props.value)}))}
                         </Fade>
                     )}
                 </Popper>
