@@ -8,6 +8,7 @@ import {Loader, Ripple} from '../../components/utils'
 import BackButton from '../../components/BackButton'
 import MenuList from '../../components/MenuList';
 import MenuSectionList from '../../components/MenuSectionList';
+import MenuItemList from '../../components/MenuItemList';
 
 import { fetchDetails } from '../../store/actions/locationDetails';
 
@@ -94,8 +95,9 @@ function Location(props) {
                 </Ripple>
             </div>
             <Switch>
-                <Route path={props.match.url + "/:menuId"} render={({match}) => <Content data={data} match={match} />} />
-                <Route path={props.match.url} render={({match}) => <Content data={data} match={match} />} />
+                <Route path={props.match.url + "/:menuId/:sectionId"} render={({match}) => <MenuItemList menuId={match.params.menuId} backColor={data.BackColor} textColor={data.TextColor} />} />
+                <Route path={props.match.url + "/:menuId"} render={({match}) => <MenuSectionList data={data.Menus.find(m => m.ID == match.params.menuId).Sections} backColor={data.BackColor} textColor={data.TextColor} />} />
+                <Route path={props.match.url} render={() => data.Menus.length === 1 ? <Redirect to={`${props.match.url}/${data.Menus[0].ID}`} /> : <MenuList data={data.Menus} backColor={data.BackColor} textColor={data.TextColor} />} />
             </Switch>
         </div>
     )
@@ -110,17 +112,5 @@ const mapDispatchToProps = dispatch => ({
     getData: id => dispatch(fetchDetails(id)),
     setLanguage: value => dispatch(setLanguage(value))
 });
-
-function Content(props) {
-    const data = props.data;
-    if(props.match.params.menuId) {
-        return <MenuSectionList data={data.Menus.find(m => m.ID == props.match.params.menuId).Sections} backColor={data.BackColor} textColor={data.TextColor} />
-    } else {
-        if(data.Menus.length === 1) {
-            return <Redirect to={`${props.match.url}/${data.Menus[0].ID}`} />
-        }
-        return <MenuList data={data.Menus} backColor={data.BackColor} textColor={data.TextColor} />
-    }
-}
 
 export default connect(mapStateToProps, mapDispatchToProps)(Location);
