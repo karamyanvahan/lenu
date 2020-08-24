@@ -23,7 +23,7 @@ function MenuItemList(props) {
 
     return (
         <div className={styles.MenuItemList}>
-            {data.MenuItems.filter(i => i.MenuSectionID == props.match.params.sectionId).map(i => <MenuItem key={i.ID} name={i.Name} backColor={data.BackColor} textColor={data.TextColor} />)}
+            {data.MenuItems.filter(i => i.MenuSectionID == props.match.params.sectionId).map(i => <MenuItem key={i.ID} name={i.Name} desc={i.Desc} price={i.Price} backColor={data.BackColor} textColor={data.TextColor} />)}
         </div>
     )
 }

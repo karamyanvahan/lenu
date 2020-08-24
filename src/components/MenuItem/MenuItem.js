@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 import * as utils from '../../utils'
 
@@ -12,8 +13,18 @@ function MenuItem(props) {
     }
 
     return (
-        <div>{props.name.en}</div>
+        <div className={styles.MenuItem}>
+            <div className={styles.name}>{props.name[props.language]}</div>
+            <div className="space sm"></div>
+            <div className="clamp clamp-3">{props.desc[props.language]}</div>
+            <div className="space md"></div>
+            <div>{props.price}</div>
+        </div>
     )
 }
 
-export default MenuItem
+const mapStateToProps = state => ({
+    language: state.locations.language
+});
+
+export default connect(mapStateToProps)(MenuItem)
