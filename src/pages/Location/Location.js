@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { connect } from 'react-redux';
 import { Route, Switch, Redirect } from 'react-router-dom';
 
@@ -29,15 +29,19 @@ function Location(props) {
         props.setLanguage(selection.value);
     }
     
+    useEffect(() => {
+        if(!data) {
+            props.getData(id);
+        }
+    }, []);
+    
     if(!data) {
-        props.getData(id);
         return (
             <div className="LocationPage">
                 <Loader />
             </div>
         )
     }
-    
 
     const headerStyle = {
         backgroundColor: utils.toHexColor(data.BackColor),
